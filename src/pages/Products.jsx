@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
-import ProductForm from "../components/ProductForm"; 
+import ProductForm from "../components/ProductForm";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [isEditing, setIsEditing] = useState(false); 
-  const [productToEdit, setProductToEdit] = useState(null); 
+  const [isEditing, setIsEditing] = useState(false);
+  const [productToEdit, setProductToEdit] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -23,7 +23,6 @@ const Products = () => {
         console.error("Erro ao buscar produtos: ", error);
       }
     };
-
     fetchProducts();
   }, []);
 
@@ -40,8 +39,8 @@ const Products = () => {
   const handleDelete = async (productId) => {
     try {
       const productDoc = doc(db, "products", productId);
-      await deleteDoc(productDoc); 
-      setProducts(products.filter((product) => product.id !== productId)); 
+      await deleteDoc(productDoc);
+      setProducts(products.filter((product) => product.id !== productId));
     } catch (error) {
       console.error("Erro ao excluir o produto: ", error);
     }

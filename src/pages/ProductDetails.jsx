@@ -4,7 +4,7 @@ import { db } from "../firebase";
 import { useEffect, useState } from "react";
 
 const ProductDetails = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
