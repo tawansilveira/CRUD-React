@@ -1,7 +1,7 @@
 function Footer() {
     return (
-        <footer className="bg-base-200 fixed inset-x-0 bottom-0">
-            <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+        <footer className="bg-base-200">
+            <div className="mx-auto max-w-screen-xl px-4 py-5 sm:px-6 lg:px-8">
                 <div className="sm:flex sm:items-center sm:justify-between">
                 <div className="flex justify-center text-teal-600 sm:justify-start dark:text-teal-300">
                 <svg className="h-8" viewBox="0 0 118 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,8 +52,7 @@ function Footer() {
                 </p>
                 </div>
             </div>
-            </footer>
-
+        </footer>
     )
 }
 

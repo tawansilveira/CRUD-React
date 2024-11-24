@@ -4,11 +4,11 @@ import Footer from "./Footer";
 
 function AppLayout() {
     return (
-        <>
-            <Header/>
-            <Outlet/>
-            <Footer/>
-        </>
+        <div className="flex flex-col min-h-screen justify-between">
+            <div><Header/></div>
+            <div className="mb-auto"><Outlet/></div>
+            <div><Footer/></div>
+        </div>
     )
 }
 

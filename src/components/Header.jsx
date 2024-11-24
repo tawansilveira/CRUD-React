@@ -1,4 +1,4 @@
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Header() {
     return (
@@ -7,19 +7,18 @@ function Header() {
                 <nav>
                 <div className="navbar bg-base-300 shadow-md">
                     <div className="flex-1">
-                        <Link className="btn btn-ghost text-xl" to="/">Mercadinho BigBom</Link>
+                        <Link className="btn btn-ghost text-2xl" to="/">Mercadinho Big Bom</Link>
                     </div>
                     <div className="flex-none">
                         <ul className="menu menu-horizontal px-1">
                         <li>
-                            <Link to="/products">Produtos</Link>
+                            <Link to="/products" className="text-lg focus:bg-none">Produtos</Link>
                         </li>
                         </ul>
                     </div>
                     </div>
                 </nav>
             </header>
-            <Outlet />
         </>
     )
 }
