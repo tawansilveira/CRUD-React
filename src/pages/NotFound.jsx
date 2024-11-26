@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function NotFound() {
+const NotFound = () => {
     return (
         <>
             <div className="grid h-screen place-content-center px-4 dark:bg-base-300">

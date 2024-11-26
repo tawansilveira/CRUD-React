@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import {
     collection,
     getDocs,
@@ -11,8 +11,7 @@ import { db } from "../firebase";
 import { useAppState } from "./AppStateContext";
 
 export const useProducts = () => {
-    // const [products, setProducts] = useState([]);
-    const {products, setProducts} = useAppState()
+    const { setProducts } = useAppState()
 
     const fetchProducts = async () => {
         try {
@@ -54,20 +53,9 @@ export const useProducts = () => {
         }
     };
 
-    // const handleCancelEdit = () => {
-    //     setIsEditing(false);
-    //     setProductToEdit(null);
-    // };
-
-    // const handleEdit = (product) => {
-    //     setProductToEdit(product);
-    //     setIsEditing(true);
-    // };
-
-
     useEffect(() => {
         fetchProducts();
     }, []);
 
-    return { products, fetchProducts, addProduct, updateProduct, deleteProduct };
+    return { fetchProducts, addProduct, updateProduct, deleteProduct };
 };

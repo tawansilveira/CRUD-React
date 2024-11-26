@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useEffect, useState } from "react";
-import { useProducts } from "../hooks/useProducts";
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -24,7 +23,6 @@ const ProductDetails = () => {
                 setLoading(false);
             }
         };
-
         fetchProduct();
     }, [id]);
 
@@ -76,7 +74,7 @@ const ProductDetails = () => {
 
                         <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
                         <dt className="font-medium text-gray-900 dark:text-white">Preço</dt>
-                        <dd className="text-gray-700 sm:col-span-2 dark:text-gray-200">R$ {product.price.toFixed(2)}</dd>
+                        <dd className="text-gray-700 sm:col-span-2 dark:text-gray-200">R$ {product.price}</dd>
                         </div>
 
                         <div className="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
@@ -90,17 +88,6 @@ const ProductDetails = () => {
                 </div>
             </div>
         </div>
-
-    // <div className="flex flex-grow">
-
-
-    //   <div>
-    //     <h1>Detalhes do Produto</h1>
-    //     <p><strong>Nome:</strong> {product.name}</p>
-    //     <p><strong>Preço:</strong> R${product.price.toFixed(2)}</p>
-    //     <p><strong>Descrição:</strong> {product.description}</p>
-    //   </div>
-    // </div>
     );
 };
 

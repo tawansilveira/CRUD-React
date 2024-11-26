@@ -4,14 +4,25 @@ const AppStateContext = createContext();
 
 export const AppStateProvider = ({ children }) => {
     const [products, setProducts] = useState([]);
-    // const [isEditing, setIsEditing] = useState(false);
-    // const [productToEdit, setProductToEdit] = useState(null);
+    const [isEditing, setIsEditing] = useState(false);
+    const [productToEdit, setProductToEdit] = useState({});
+
+    const handleCancelEdit = () => {
+        setIsEditing(false);
+        setProductToEdit({});
+    };
+
+    const handleEdit = (product) => {
+        setProductToEdit(product);
+        setIsEditing(true);
+    };
 
     return (
         <AppStateContext.Provider value={{
-            products, setProducts
-            // isEditing, setIsEditing,
-            // productToEdit, setProductToEdit
+            products, setProducts,
+            isEditing, setIsEditing,
+            productToEdit, setProductToEdit,
+            handleEdit, handleCancelEdit
         }}>
             {children}
         </AppStateContext.Provider>

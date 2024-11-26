@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { useProducts } from "../hooks/useProducts";
+import { useAppState } from "../hooks/AppStateContext";
 
-const ProductForm = ({ onSubmit, initialData = {}, isEditing }) => {
-  const {addProduct, updateProduct} = useProducts()
-  const [id, setId] = useState(initialData.id || "");
-  const [name, setName] = useState(initialData.name || "");
-  const [price, setPrice] = useState(initialData.price || "");
-  const [description, setDescription] = useState(initialData.description || "");
-  const [imageUrl, setImageUrl] = useState(initialData.imageUrl || "");
+const ProductForm = () => {
+  const { addProduct, updateProduct } = useProducts()
+  const { productToEdit, isEditing, handleCancelEdit } = useAppState()
+  const [id, setId] = useState(productToEdit.id || "");
+  const [name, setName] = useState(productToEdit.name || "");
+  const [price, setPrice] = useState(productToEdit.price || "");
+  const [description, setDescription] = useState(productToEdit.description || "");
+  const [imageUrl, setImageUrl] = useState(productToEdit.imageUrl || "");
 
 
   // TODO - Está impedindo o cadastro
@@ -26,17 +28,29 @@ const ProductForm = ({ onSubmit, initialData = {}, isEditing }) => {
     setPrice(parseFloat(formData.get('price')));
     setDescription(formData.get('description'));
     setImageUrl(formData.get('imageUrl'));
+    console.log("formdata:")
+    console.log(name)
+    console.log(price)
+    console.log(description)
+    console.log(imageUrl)
     if (!name || !price || !description || !imageUrl) {
       alert("Todos os campos são obrigatórios!");
       return;
     }
-    onSubmit();
+
+    let product = {
+      name: name,
+      price: price,
+      description: description,
+      imageUrl: imageUrl
+    }
 
     if (isEditing) {
       updateProduct(
         id,
         product
       )
+      handleCancelEdit()
     } else {
       addProduct(product)
     }
@@ -57,6 +71,8 @@ const ProductForm = ({ onSubmit, initialData = {}, isEditing }) => {
                     <input
                         type="text"
                         name="name"
+                        value={isEditing ? productToEdit.name : name}
+                        onChange={(e) => (setName(e.target.value))}
                         placeholder="Nome do produto"
                         required
                         className="p-2 rounded"
@@ -64,6 +80,8 @@ const ProductForm = ({ onSubmit, initialData = {}, isEditing }) => {
                     <input
                         type="number"
                         name="price"
+                        value={isEditing ? productToEdit.price : price}
+                        onChange={(e) => (setPrice(e.target.value))}
                         step="any"
                         placeholder="Preço do produto"
                         required
@@ -73,6 +91,8 @@ const ProductForm = ({ onSubmit, initialData = {}, isEditing }) => {
                     type="text"
                     placeholder="Descrição"
                     name="description"
+                    value={isEditing ? productToEdit.description : description}
+                    onChange={(e) => (setDescription(e.target.value))}
                     rows={6}
                     required
                     className="p-2 rounded"
@@ -81,6 +101,8 @@ const ProductForm = ({ onSubmit, initialData = {}, isEditing }) => {
                         type="text"
                         placeholder="URL da imagem"
                         name="imageUrl"
+                        value={isEditing ? productToEdit.imageUrl : imageUrl}
+                        onChange={(e) => (setImageUrl(e.target.value))}
                         required
                         className="p-2 rounded"
                     />
@@ -91,8 +113,8 @@ const ProductForm = ({ onSubmit, initialData = {}, isEditing }) => {
                         <button
                           type="submit"
                           className="btn bg-base-300 hover:btn-neutral w-fit"
-                          >
-                            <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay">
+                        >
+                          <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay">
                               Atualizar Produto
                             </label>
                         </button>
